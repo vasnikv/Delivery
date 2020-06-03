@@ -1,10 +1,10 @@
 package ru.iv.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import ru.iv.converter.LocalDateAttributeConverter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "persons")
@@ -13,6 +13,7 @@ public class Person {
     // https://api.elephantsql.com/console/718afc0a-dfdc-43b9-bf85-f0d5af418983/browser?
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -28,15 +29,21 @@ public class Person {
     private String gender; // TODO справочник
 
     @Column
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDate;
 
     @Column
     private String position; // должность TODO справочник
 
     @Column
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate EmplDate; // Дата приема
 
     @Column
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate DismDate; // Дата увольнения
 
     //https://api.elephantsql.com/console/718afc0a-dfdc-43b9-bf85-f0d5af418983/browser

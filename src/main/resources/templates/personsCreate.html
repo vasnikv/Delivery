@@ -29,10 +29,10 @@
                     <td><input th:field="*{persons[__${itemStat.index}__].firstName}"/></td>
                     <td><input th:field="*{persons[__${itemStat.index}__].middleName}"/></td>
                     <td><input th:field="*{persons[__${itemStat.index}__].lastName}"/></td>
-                    <td><input th:field="*{persons[__${itemStat.index}__].birthDate}"/></td>
+                    <td><input type="date" th:field="*{persons[__${itemStat.index}__].birthDate}"/></td>
                     <td><input th:field="*{persons[__${itemStat.index}__].gender}"/></td>
                     <td><input th:field="*{persons[__${itemStat.index}__].position}"/></td>
-                    <td><input th:field="*{persons[__${itemStat.index}__].emplDate}"/></td>
+                    <td><input type="date" th:field="*{persons[__${itemStat.index}__].emplDate}"/></td>
                 </tr>
                 </tbody>
             </table>
