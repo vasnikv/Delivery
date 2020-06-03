@@ -21,6 +21,7 @@
         </tr>
         </thead>
         <tbody>
+        <div th:insert="~{fragments :: header}"></div>
         <tr th:if="${persons.empty}">
             <td colspan="2"> No Persons Available </td>
         </tr>

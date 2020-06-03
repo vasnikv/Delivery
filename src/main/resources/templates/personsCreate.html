@@ -6,7 +6,7 @@
 </head>
 <body>
 
-
+    <div th:insert="~{fragments :: header}"></div>
     <form action="#" th:action="@{/persons/save}" th:object="${form}"
           method="post">
         <fieldset>
