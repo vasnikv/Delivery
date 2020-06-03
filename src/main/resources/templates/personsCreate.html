@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <form action="#" th:action="@{/persons/save}" th:object="${form}"
+          method="post">
+        <fieldset>
+            <input type="submit" id="submitButton" th:value="Save">
+            <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+            <table>
+                <thead>
+                <tr>
+                    <th> firstName </th>
+                    <th> middleName </th>
+                    <th> lastName </th>
+                    <th> birthDate </th>
+                    <th> gender </th>
+                    <th> position </th>
+                    <th> emplDate </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="person, itemStat : *{persons}">
+                    <td><input th:field="*{persons[__${itemStat.index}__].firstName}"/></td>
+                    <td><input th:field="*{persons[__${itemStat.index}__].middleName}"/></td>
+                    <td><input th:field="*{persons[__${itemStat.index}__].lastName}"/></td>
+                    <td><input th:field="*{persons[__${itemStat.index}__].birthDate}"/></td>
+                    <td><input th:field="*{persons[__${itemStat.index}__].gender}"/></td>
+                    <td><input th:field="*{persons[__${itemStat.index}__].position}"/></td>
+                    <td><input th:field="*{persons[__${itemStat.index}__].emplDate}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+
+
+</body>
+</html>
