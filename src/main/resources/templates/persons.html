@@ -21,6 +21,7 @@
         </tr>
         </thead>
         <tbody>
+        <div th:insert="~{fragments :: header}"></div>
         <tr th:if="${persons.empty}">
             <td colspan="2"> No Persons Available </td>
         </tr>
@@ -28,14 +29,15 @@
             <td><span th:text="${person.firstName}"> firstName </span></td>
             <td><span th:text="${person.middleName}"> middleName </span></td>
             <td><span th:text="${person.lastName}"> lastName </span></td>
-            <td><span th:text="${person.birthDate}"> birthDate </span></td>
-            <td><span th:text="${person.gender}"> gender </span></td>
-            <td><span th:text="${person.position}"> position </span></td>
-            <td><span th:text="${person.emplDate}"> emplDate </span></td>
-            <td><span th:text="${person.dismDate}"> dismDate </span></td>
+            <td><span th:text="${#temporals.format(person.birthDate, 'dd.MM.yyyy')}"> birthDate </span></td>
+            <td><span th:if="${person.gender}" th:text="${person.gender.name}"> gender.name </span><span th:unless="${person.gender}"> - </span></td>
+            <td><span th:if="${person.position}" th:text="${person.position.name}"> position.name </span><span th:unless="${person.position}"> - </span></td>
+            <td><span th:text="${#temporals.format(person.emplDate, 'dd.MM.yyyy')}"> emplDate </span></td>
+            <td><span th:text="${#temporals.format(person.dismDate, 'dd.MM.yyyy')}"> dismDate </span></td>
         </tr>
         </tbody>
     </table>
+    <a href="persons/create">Create person</a>
 
 
 </body>
