@@ -30,8 +30,8 @@
             <td><span th:text="${person.middleName}"> middleName </span></td>
             <td><span th:text="${person.lastName}"> lastName </span></td>
             <td><span th:text="${#temporals.format(person.birthDate, 'dd.MM.yyyy')}"> birthDate </span></td>
-            <td><span th:text="${person.gender}"> gender </span></td>
-            <td><span th:text="${person.position}"> position </span></td>
+            <td><span th:if="${person.gender}" th:text="${person.gender.name}"> gender.name </span><span th:unless="${person.gender}"> - </span></td>
+            <td><span th:if="${person.position}" th:text="${person.position.name}"> position.name </span><span th:unless="${person.position}"> - </span></td>
             <td><span th:text="${#temporals.format(person.emplDate, 'dd.MM.yyyy')}"> emplDate </span></td>
             <td><span th:text="${#temporals.format(person.dismDate, 'dd.MM.yyyy')}"> dismDate </span></td>
         </tr>

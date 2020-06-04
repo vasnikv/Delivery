@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "persons")
+@Table(name = "PERSONS")
 public class Person {
 
     // https://api.elephantsql.com/console/718afc0a-dfdc-43b9-bf85-f0d5af418983/browser?
@@ -16,35 +16,39 @@ public class Person {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(name = "first_name", length = 16)
     public String firstName;
 
-    @Column
+    @Column(name = "middle_name", length = 16)
     private String middleName;
 
-    @Column
+    @Column(name = "last_name", length = 16)
     private String lastName;
 
-    @Column
-    private String gender; // TODO справочник
+//    @Column(name = "gender", length = 10)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gender_id")
+    private Gender gender; // TODO справочник
 
-    @Column
+    @Column(name = "birth_date")
     @Convert(converter = LocalDateAttributeConverter.class)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate birthDate;
 
-    @Column
-    private String position; // должность TODO справочник
+//    @Column(name = "position_id", length = 32)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "position_id")
+    private Position position; // должность TODO справочник
 
-    @Column
+    @Column(name = "empl_date")
     @Convert(converter = LocalDateAttributeConverter.class)
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate EmplDate; // Дата приема
+    private LocalDate emplDate; // Дата приема
 
-    @Column
+    @Column(name = "dism_date")
     @Convert(converter = LocalDateAttributeConverter.class)
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate DismDate; // Дата увольнения
+    private LocalDate dismDate; // Дата увольнения
 
     //https://api.elephantsql.com/console/718afc0a-dfdc-43b9-bf85-f0d5af418983/browser
     //insert into public.persons (firstname, middlename, lastname, gender, birthdate, position, empldate) values ('Ivan','Ivanovich', 'Ivanov', 'M', '1980-01-01', 'boss', '2000-01-01');
@@ -83,11 +87,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -99,27 +103,27 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
     public LocalDate getEmplDate() {
-        return EmplDate;
+        return emplDate;
     }
 
     public void setEmplDate(LocalDate emplDate) {
-        EmplDate = emplDate;
+        this.emplDate = emplDate;
     }
 
     public LocalDate getDismDate() {
-        return DismDate;
+        return dismDate;
     }
 
     public void setDismDate(LocalDate dismDate) {
-        DismDate = dismDate;
+        this.dismDate = dismDate;
     }
 }

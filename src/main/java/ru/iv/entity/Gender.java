@@ -1,20 +1,19 @@
 package ru.iv.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "GENDERS")
 public class Gender {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(name = "name", length = 10)
     public String name;
 
-    @Column
-    private String fullName;
+    @Column(name = "short_name", length = 1)
+    private String shortName;
 
     public Long getId() {
         return id;
@@ -32,11 +31,11 @@ public class Gender {
         this.name = name;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getShortName() {
+        return shortName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 }
