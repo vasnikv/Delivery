@@ -20,7 +20,6 @@
             <th> emplDate </th>
             <th> dismDate </th>
             <th> Edit </th>
-            <th> Delete </th>
         </tr>
         </thead>
         <tbody>
@@ -37,8 +36,7 @@
             <td><span th:if="${person.position}" th:text="${person.position.name}"> position.name </span><span th:unless="${person.position}"> - </span></td>
             <td><span th:text="${#temporals.format(person.emplDate, 'dd.MM.yyyy')}"> emplDate </span></td>
             <td><span th:text="${#temporals.format(person.dismDate, 'dd.MM.yyyy')}"> dismDate </span></td>
-            <td><a href="persons/edit">edit</a></td>
-            <td><a href="persons/delete">delete</a></td>
+            <td><a th:href="@{'persons/edit/' + ${person.id}}">edit</a></td>
         </tr>
         </tbody>
     </table>

@@ -11,8 +11,8 @@
         <tr>
             <th> Наименование </th>
             <th> Короткаое название </th>
-            <th> Редактировать </th>
             <th> Активость </th>
+            <th> Edit </th>
         </tr>
         </thead>
         <tbody>
@@ -23,8 +23,8 @@
         <tr th:each="position : ${positions}">
             <td><span th:text="${position.name}"> name </span></td>
             <td><span th:text="${position.shortName}"> shortName </span></td>
-            <td><a href="positions/edit">edit</a></td>
-            <td><a href="positions/active" th:text="${position.active}"></a></td>
+            <td><span th:if="${position.active}"> V </span><span th:unless="${position.active}">X</span></td>
+            <td><a th:href="@{'positions/edit/' + ${position.id}}">edit</a></td>
         </tr>
         </tbody>
     </table>

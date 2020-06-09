@@ -5,11 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.iv.dto.PersonsCreationDto;
+import org.springframework.web.bind.annotation.*;
 import ru.iv.entity.Gender;
 import ru.iv.entity.Person;
 import ru.iv.entity.Position;
@@ -48,9 +44,27 @@ public class MyController {
     @GetMapping("/persons/create")
     public String showCreatePersonForm(Model model) {
         // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
-        PersonsCreationDto personsForm = new PersonsCreationDto();
-        personsForm.addPerson(new Person());
-        model.addAttribute("form", personsForm);
+        model.addAttribute("person", new Person());
+
+        List<Position> positions = positionsRepository.findOnlyActive();
+        Map<Long, String> mapPositions = new HashMap<>();
+        positions.forEach(p -> mapPositions.put(p.getId(), p.getName()));
+        model.addAttribute("mapPositions", mapPositions);
+
+        List<Gender> genders = gendersRepository.findAll();
+        Map<Long, String> mapGenders = new HashMap<>();
+        genders.forEach(p -> mapGenders.put(p.getId(), p.getName()));
+        model.addAttribute("mapGenders", mapGenders);
+
+        return "personsCreate";
+    }
+
+    @GetMapping("/persons/edit/{personId}")
+    public String showEditPersonForm(@PathVariable Long personId, Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+
+        Person person = personsRepository.findById(personId).orElse(new Person());
+        model.addAttribute("person", person);
 
         List<Position> positions = positionsRepository.findAll();
         Map<Long, String> mapPositions = new HashMap<>();
@@ -66,9 +80,8 @@ public class MyController {
     }
 
     @PostMapping("/persons/save")
-    public String savePerson(@ModelAttribute PersonsCreationDto form, Model model) {
-        personsRepository.saveAll(form.getPersons());
-
+    public String savePerson(@ModelAttribute Person person, Model model) {
+        personsRepository.save(person);
         model.addAttribute("persons", personsRepository.findAll());
         return "redirect:/persons";
     }
@@ -82,15 +95,21 @@ public class MyController {
     @GetMapping("/positions/create")
     public String showCreatePositionForm(Model model) {
         // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
-        //PersonsCreationDto personsForm = new PersonsCreationDto();
         model.addAttribute("position", new Position());
+        return "positionsCreate";
+    }
+
+    @GetMapping("/positions/edit/{positionId}")
+    public String showEditPositionForm(@PathVariable Long positionId, Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+        Position position = positionsRepository.findById(positionId).orElse(new Position());
+        model.addAttribute("position", position);
         return "positionsCreate";
     }
 
     @PostMapping("/positions/save")
     public String savePosition(@ModelAttribute Position position, Model model) {
         positionsRepository.save(position);
-
         model.addAttribute("positions", positionsRepository.findAll());
         return "redirect:/positions";
     }
