@@ -6,11 +6,11 @@
 </head>
 <body>
     <div th:insert="~{fragments :: header}"></div>
-    <table>
+    <table class="table table-striped table-bordered table-hover table-condensed">
         <thead>
         <tr>
             <th> Наименование </th>
-            <th> Короткаое название </th>
+            <th> Короткое название </th>
             <th> Активость </th>
             <th> Edit </th>
         </tr>
@@ -23,12 +23,12 @@
         <tr th:each="position : ${positions}">
             <td><span th:text="${position.name}"> name </span></td>
             <td><span th:text="${position.shortName}"> shortName </span></td>
-            <td><span th:if="${position.active}"> V </span><span th:unless="${position.active}">X</span></td>
-            <td><a th:href="@{'positions/edit/' + ${position.id}}">edit</a></td>
+            <td><span th:if="${position.active}">&#10004;</span><span th:unless="${position.active}">&#10007;</span></td>
+            <td><a th:href="@{'positions/edit/' + ${position.id}}" class="btn btn-primary btn-xs">edit</a></td>
         </tr>
         </tbody>
     </table>
-<a href="positions/create">Создать должность</a>
+<a href="positions/create" class="btn btn-info">Добавить должность</a>
 
 </body>
 </html>
