@@ -6,6 +6,7 @@
 </head>
 <body>
 
+    <div th:insert="~{fragments :: header}"></div>
 
     <table>
         <thead>
@@ -18,10 +19,12 @@
             <th> position </th>
             <th> emplDate </th>
             <th> dismDate </th>
+            <th> Edit </th>
+            <th> Delete </th>
         </tr>
         </thead>
         <tbody>
-        <div th:insert="~{fragments :: header}"></div>
+
         <tr th:if="${persons.empty}">
             <td colspan="2"> No Persons Available </td>
         </tr>
@@ -34,6 +37,8 @@
             <td><span th:if="${person.position}" th:text="${person.position.name}"> position.name </span><span th:unless="${person.position}"> - </span></td>
             <td><span th:text="${#temporals.format(person.emplDate, 'dd.MM.yyyy')}"> emplDate </span></td>
             <td><span th:text="${#temporals.format(person.dismDate, 'dd.MM.yyyy')}"> dismDate </span></td>
+            <td><a href="persons/edit">edit</a></td>
+            <td><a href="persons/delete">delete</a></td>
         </tr>
         </tbody>
     </table>

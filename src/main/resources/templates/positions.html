@@ -5,6 +5,30 @@
     <title>Title</title>
 </head>
 <body>
+    <div th:insert="~{fragments :: header}"></div>
+    <table>
+        <thead>
+        <tr>
+            <th> Наименование </th>
+            <th> Короткаое название </th>
+            <th> Редактировать </th>
+            <th> Активость </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:if="${positions.empty}">
+            <td colspan="2"> Пусто </td>
+        </tr>
+        <tr th:each="position : ${positions}">
+            <td><span th:text="${position.name}"> name </span></td>
+            <td><span th:text="${position.shortName}"> shortName </span></td>
+            <td><a href="positions/edit">edit</a></td>
+            <td><a href="positions/active" th:text="${position.active}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+<a href="positions/create">Создать должность</a>
 
 </body>
 </html>

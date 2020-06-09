@@ -40,13 +40,13 @@ public class MyController {
     GendersRepository gendersRepository;
 
     @GetMapping("/persons")
-    public String showAll(Model model) {
+    public String showAllPersons(Model model) {
         model.addAttribute("persons", personsRepository.findAll());
         return "persons";
     }
 
     @GetMapping("/persons/create")
-    public String showCreateForm(Model model) {
+    public String showCreatePersonForm(Model model) {
         // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
         PersonsCreationDto personsForm = new PersonsCreationDto();
         personsForm.addPerson(new Person());
@@ -66,11 +66,33 @@ public class MyController {
     }
 
     @PostMapping("/persons/save")
-    public String saveBooks(@ModelAttribute PersonsCreationDto form, Model model) {
+    public String savePerson(@ModelAttribute PersonsCreationDto form, Model model) {
         personsRepository.saveAll(form.getPersons());
 
         model.addAttribute("persons", personsRepository.findAll());
         return "redirect:/persons";
+    }
+
+    @GetMapping("/positions")
+    public String showAllPositions(Model model) {
+        model.addAttribute("positions", positionsRepository.findAll());
+        return "positions";
+    }
+
+    @GetMapping("/positions/create")
+    public String showCreatePositionForm(Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+        //PersonsCreationDto personsForm = new PersonsCreationDto();
+        model.addAttribute("position", new Position());
+        return "positionsCreate";
+    }
+
+    @PostMapping("/positions/save")
+    public String savePosition(@ModelAttribute Position position, Model model) {
+        positionsRepository.save(position);
+
+        model.addAttribute("positions", positionsRepository.findAll());
+        return "redirect:/positions";
     }
 
 }

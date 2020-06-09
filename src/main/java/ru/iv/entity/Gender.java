@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "GENDERS")
 public class Gender {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    //@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name", length = 10)
@@ -37,5 +37,14 @@ public class Gender {
 
     public void setShortName(String shortName) {
         this.shortName = shortName;
+    }
+
+    public Gender(Long id, String name, String shortName) {
+        this.id = id;
+        this.name = name;
+        this.shortName = shortName;
+    }
+
+    public Gender() {
     }
 }

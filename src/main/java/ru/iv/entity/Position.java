@@ -16,6 +16,9 @@ public class Position {
     @Column(name = "short_name", length = 32)
     private String shortName;
 
+    @Column(name = "active", columnDefinition = "boolean default false")
+    private Boolean active;
+
     public Long getId() {
         return id;
     }
@@ -38,5 +41,21 @@ public class Position {
 
     public void setShortName(String shortName) {
         this.shortName = shortName;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Position(String name, String shortName) {
+        this.name = name;
+        this.shortName = shortName;
+    }
+
+    public Position() {
     }
 }
