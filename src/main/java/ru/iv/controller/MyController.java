@@ -3,6 +3,7 @@ package ru.iv.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,16 @@ public class MyController {
 
     @Autowired
     GendersRepository gendersRepository;
+
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
+
+    @GetMapping("/403")
+    public String error403() {
+        return "/error/403";
+    }
 
     @GetMapping("/persons")
     public String showAllPersons(Model model) {
@@ -81,6 +92,10 @@ public class MyController {
 
     @PostMapping("/persons/save")
     public String savePerson(@ModelAttribute Person person, Model model) {
+        final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        if (person.getPassword().length() < 60){
+            person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
+        }
         personsRepository.save(person);
         model.addAttribute("persons", personsRepository.findAll());
         return "redirect:/persons";

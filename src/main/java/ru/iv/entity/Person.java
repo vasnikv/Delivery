@@ -50,6 +50,14 @@ public class Person {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate dismDate; // Дата увольнения
 
+    @Column(name = "login", length = 16)
+    private String login;
+
+    @Column(name = "password", length = 64)
+    private String password;
+
+    @Column(name = "role", length = 16)
+    private String role;
     //https://api.elephantsql.com/console/718afc0a-dfdc-43b9-bf85-f0d5af418983/browser
     //insert into public.persons (firstname, middlename, lastname, gender, birthdate, position, empldate) values ('Ivan','Ivanovich', 'Ivanov', 'M', '1980-01-01', 'boss', '2000-01-01');
     //https://www.codeflow.site/ru/article/thymeleaf-list
@@ -125,5 +133,29 @@ public class Person {
 
     public void setDismDate(LocalDate dismDate) {
         this.dismDate = dismDate;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

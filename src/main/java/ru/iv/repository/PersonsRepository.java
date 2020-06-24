@@ -1,9 +1,13 @@
 package ru.iv.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import ru.iv.entity.Person;
 
 public interface PersonsRepository extends JpaRepository<Person, Long> {
+
+    @Query(value = "select p from Person p where p.login = ?1")
+    Person findByLogin(String login);
 
 //    @Query(value = "select c from Coord c where c.vehicle.id = :id")
 //    public List<Coord> findLastCoord(Long id, org.springframework.data.domain.Pageable pageable);

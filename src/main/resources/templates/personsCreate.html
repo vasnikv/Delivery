@@ -23,6 +23,10 @@
                     <th> Пол </th>
                     <th> Должность </th>
                     <th> Дата приема </th>
+                    <th> Дата увольнения </th>
+                    <th> Логин </th>
+                    <th> Пароль </th>
+                    <th> Роль </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,7 +44,6 @@
                             </option>
                         </select>
                     </td>
-                    <!--<td><input th:field="*{persons[__${itemStat.index}__].gender.id}"/></td>-->
                     <td>
                         <select th:field="*{position}">
                             <option value=""> -- </option>
@@ -50,8 +53,11 @@
                             </option>
                         </select>
                     </td>
-                    <!--<td><input th:field="*{persons[__${itemStat.index}__].position.id}"/></td>-->
                     <td><input type="date" th:field="*{emplDate}"/></td>
+                    <td><input type="date" th:field="*{dismDate}"/></td>
+                    <td><input th:field="*{login}"/></td>
+                    <td><input th:field="*{password}"/></td>
+                    <td><input th:field="*{role}"/></td>
                 </tr>
                 </tbody>
             </table>

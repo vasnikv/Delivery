@@ -19,7 +19,10 @@
             <th> Должность </th>
             <th> Дата приема </th>
             <th> Дата увольнения </th>
-            <th> Редактировать </th>
+            <th th:if="${#request.isUserInRole('ROLE_ADMIN')}"> Логин </th>
+            <th th:if="${#request.isUserInRole('ROLE_ADMIN')}"> Пароль </th>
+            <th th:if="${#request.isUserInRole('ROLE_ADMIN')}"> Роль </th>
+            <th th:if="${#request.isUserInRole('ROLE_ADMIN')}"> Редактировать </th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +39,10 @@
             <td><span th:if="${person.position}" th:text="${person.position.name}"> position.name </span><span th:unless="${person.position}"> - </span></td>
             <td><span th:text="${#temporals.format(person.emplDate, 'dd.MM.yyyy')}"> emplDate </span></td>
             <td><span th:text="${#temporals.format(person.dismDate, 'dd.MM.yyyy')}"> dismDate </span></td>
-            <td><a th:href="@{'persons/edit/' + ${person.id}}" class="btn btn-primary btn-xs">edit</a></td>
+            <td th:if="${#request.isUserInRole('ADMIN')}"><span th:text="${person.login}"> login </span></td>
+            <td th:if="${#request.isUserInRole('ADMIN')}"><span th:text="${person.password}"> password </span></td>
+            <td th:if="${#request.isUserInRole('ADMIN')}"><span th:text="${person.role}"> role </span></td>
+            <td th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{'persons/edit/' + ${person.id}}" class="btn btn-primary btn-xs">edit</a></td>
         </tr>
         </tbody>
     </table>
