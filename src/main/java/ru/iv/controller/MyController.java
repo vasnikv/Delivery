@@ -7,14 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.iv.entity.Gender;
-import ru.iv.entity.Person;
-import ru.iv.entity.Position;
-import ru.iv.entity.Stage;
-import ru.iv.repository.GendersRepository;
-import ru.iv.repository.PersonsRepository;
-import ru.iv.repository.PositionsRepository;
-import ru.iv.repository.StagesRepository;
+import ru.iv.entity.*;
+import ru.iv.repository.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +31,9 @@ public class MyController {
 
     @Autowired
     StagesRepository stagesRepository;
+
+    @Autowired
+    OrdersRepository ordersRepository;
 
     @Autowired
     GendersRepository gendersRepository;
@@ -134,6 +131,8 @@ public class MyController {
         return "redirect:/positions";
     }
 
+    //--------------------------------------------
+
     @GetMapping("/stages")
     public String showAllStages(Model model) {
         model.addAttribute("stages", stagesRepository.findAll());
@@ -162,5 +161,33 @@ public class MyController {
         return "redirect:/stages";
     }
 
+    //------------------------------------------
 
+    @GetMapping("/orders")
+    public String showAllOrders(Model model) {
+        model.addAttribute("orders", ordersRepository.findAll());
+        return "orders";
+    }
+
+    @GetMapping("/orders/create")
+    public String showCreateOrderForm(Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+        model.addAttribute("order", new Order());
+        return "ordersCreate";
+    }
+
+    @GetMapping("/orders/edit/{orderId}")
+    public String showEditOrderForm(@PathVariable Long orderId, Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+        Order order = ordersRepository.findById(orderId).orElse(new Order());
+        model.addAttribute("order", order);
+        return "ordersCreate";
+    }
+
+    @PostMapping("/orders/save")
+    public String saveOrder(@ModelAttribute Order order, Model model) {
+        ordersRepository.save(order);
+        model.addAttribute("orders", ordersRepository.findAll());
+        return "redirect:/orders";
+    }
 }

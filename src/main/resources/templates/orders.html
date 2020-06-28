@@ -27,8 +27,8 @@
     </thead>
     <tbody>
 
-    <tr th:if="${orders.empty}">
-        <td colspan="2"> Заказов не найдено </td>
+    <tr th:if="${#lists.isEmpty(orders)}">
+        <td colspan="8"> Заказов не найдено </td>
     </tr>
     <tr th:each="order : ${orders}">
         <td><span th:text="${order.number}"> number </span></td>
@@ -46,7 +46,7 @@
     </tr>
     </tbody>
 </table>
-<a href="persons/create" class="btn btn-info">Добавить сотрудника</a>
+<a href="orders/create" class="btn btn-info">Добавить заказ</a>
 
 
 </body>
