@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import ru.iv.entity.Gender;
 import ru.iv.entity.Person;
 import ru.iv.entity.Position;
+import ru.iv.entity.Stage;
 import ru.iv.repository.GendersRepository;
 import ru.iv.repository.PersonsRepository;
 import ru.iv.repository.PositionsRepository;
+import ru.iv.repository.StagesRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,9 @@ public class MyController {
 
     @Autowired
     PositionsRepository positionsRepository;
+
+    @Autowired
+    StagesRepository stagesRepository;
 
     @Autowired
     GendersRepository gendersRepository;
@@ -128,5 +133,34 @@ public class MyController {
         model.addAttribute("positions", positionsRepository.findAll());
         return "redirect:/positions";
     }
+
+    @GetMapping("/stages")
+    public String showAllStages(Model model) {
+        model.addAttribute("stages", stagesRepository.findAll());
+        return "stages";
+    }
+
+    @GetMapping("/stages/create")
+    public String showCreateStageForm(Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+        model.addAttribute("stage", new Stage());
+        return "stagesCreate";
+    }
+
+    @GetMapping("/stages/edit/{stageId}")
+    public String showEditStageForm(@PathVariable Long stageId, Model model) {
+        // TODO переделать все сущности в модель на вьюхи в модель, нельзя напрямую кидать сущность в отображение
+        Stage stage = stagesRepository.findById(stageId).orElse(new Stage());
+        model.addAttribute("stage", stage);
+        return "stagesCreate";
+    }
+
+    @PostMapping("/stages/save")
+    public String saveStage(@ModelAttribute Stage stage, Model model) {
+        stagesRepository.save(stage);
+        model.addAttribute("stages", stagesRepository.findAll());
+        return "redirect:/stages";
+    }
+
 
 }

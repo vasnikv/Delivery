@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Стадии</title>
+        </head>
+<body>
+<div th:insert="~{fragments :: header}"></div>
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <thead>
+    <tr>
+        <th> Наименование </th>
+        <th> Сортировка </th>
+        <th> Активность </th>
+        <th> Edit </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:if="${stages.empty}">
+        <td colspan="2"> Пусто </td>
+    </tr>
+    <tr th:each="stage : ${stages}">
+        <td><span th:text="${stage.name}"> name </span></td>
+        <td><span th:text="${stage.sort}"> sort </span></td>
+        <td><span th:if="${stage.active}">&#10004;</span><span th:unless="${stage.active}">&#10007;</span></td>
+        <td><a th:href="@{'stages/edit/' + ${stage.id}}" class="btn btn-primary btn-xs">edit</a></td>
+    </tr>
+    </tbody>
+</table>
+<a href="stages/create" class="btn btn-info">Добавить стадию</a>
+
+</body>
+</html>

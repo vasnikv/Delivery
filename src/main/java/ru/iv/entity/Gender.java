@@ -10,7 +10,7 @@ public class Gender {
     private Long id;
 
     @Column(name = "name", length = 10)
-    public String name;
+    private String name;
 
     @Column(name = "short_name", length = 1)
     private String shortName;
@@ -47,4 +47,6 @@ public class Gender {
 
     public Gender() {
     }
+
+
 }

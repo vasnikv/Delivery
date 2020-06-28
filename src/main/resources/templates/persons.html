@@ -8,6 +8,10 @@
 
     <div th:insert="~{fragments :: header}"></div>
 
+    <div th:text=" ${#lists.size(persons)}"></div>
+
+    <div th:text=" ${persons[#lists.size(persons)-1].firstName}"></div>
+
     <table class="table table-striped table-bordered table-hover table-condensed">
         <thead>
         <tr>

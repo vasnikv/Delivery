@@ -31,6 +31,7 @@ public class DeliveryUserDetailsService implements UserDetailsService {
 
         List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority(person.getRole()));
 
-        return new User(person.getLogin(), person.getPassword(), person.getDismDate() != null, person.getDismDate() != null, true, person.getDismDate() != null, authorities);
+        return new User(person.getLogin(), person.getPassword(), authorities);
+//        return new User(person.getLogin(), person.getPassword(), person.getDismDate() != null, person.getDismDate() != null, true, person.getDismDate() != null, authorities);
     }
 }

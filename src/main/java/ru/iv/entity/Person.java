@@ -28,7 +28,7 @@ public class Person {
 //    @Column(name = "gender", length = 10)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "gender_id")
-    private Gender gender; // TODO справочник
+    private Gender gender;
 
     @Column(name = "birth_date")
     @Convert(converter = LocalDateAttributeConverter.class)
@@ -38,7 +38,7 @@ public class Person {
 //    @Column(name = "position_id", length = 32)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "position_id")
-    private Position position; // должность TODO справочник
+    private Position position;
 
     @Column(name = "empl_date")
     @Convert(converter = LocalDateAttributeConverter.class)
@@ -158,4 +158,6 @@ public class Person {
     public void setRole(String role) {
         this.role = role;
     }
+
+
 }
