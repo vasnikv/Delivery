@@ -37,7 +37,7 @@
         <td><span th:text="${#temporals.format(order.startDate, 'dd.MM.yyyy')}"> startDate </span></td>
         <td><span th:if="${order.client}" th:text="${order.client.name}"> client </span><span th:unless="${order.client}"> - </span></td>
         <td><span th:if="${order.address}" th:text="${order.address.location}"> address </span><span th:unless="${order.address}"> - </span></td>
-        <td><span th:if="${order.address}" th:text="${order.address.location}"> cookingstage </span><span th:unless="${order.address}"> - </span></td>
+        <td><span th:if="${order.stage}" th:text="${order.stage.name}"> cookingstage </span><span th:unless="${order.stage}"> - </span></td>
         <td><span th:text="${order.description}"> description </span></td>
         <!--<td th:if="${#request.isUserInRole('ADMIN')}"><span th:text="${person.login}"> login </span></td>-->
         <!--<td th:if="${#request.isUserInRole('ADMIN')}"><span th:text="${person.password}"> password </span></td>-->

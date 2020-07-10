@@ -38,6 +38,9 @@ public class MyController {
     @Autowired
     GendersRepository gendersRepository;
 
+    @Autowired
+    ClientsRepository clientsRepository;
+
     @GetMapping("/login")
     public String login() {
         return "/login";
@@ -190,4 +193,13 @@ public class MyController {
         model.addAttribute("orders", ordersRepository.findAll());
         return "redirect:/orders";
     }
+    //-------------------------------------------------------------------------
+
+    @GetMapping("/rest")
+    public List<Client> searchClientName(String name){
+        List<Client> clients = clientsRepository.searchClientName(name);
+        return clients;
+    }
+
+
 }

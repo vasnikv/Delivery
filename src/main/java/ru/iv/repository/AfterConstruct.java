@@ -1,10 +1,12 @@
 package ru.iv.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.iv.entity.Gender;
-import ru.iv.entity.Position;
+import org.springframework.stereotype.Component;
+import ru.iv.entity.Client;
 
-//@Component
+import javax.annotation.PostConstruct;
+
+@Component
 public class AfterConstruct {
 
     @Autowired
@@ -13,12 +15,19 @@ public class AfterConstruct {
     @Autowired
     GendersRepository gendersRepository;
 
-    //@PostConstruct
-    public void init(){
-        gendersRepository.save(new Gender(1L,"Мужской","M"));
-        gendersRepository.save(new Gender(2L,"Женский","Ж"));
+    @Autowired
+    ClientsRepository clientsRepository;
 
-        positionsRepository.save(new Position("Директор","Д"));
-        positionsRepository.save(new Position("Заместитель директора","ЗД"));
+    @PostConstruct
+    public void init(){
+        //gendersRepository.save(new Gender(1L,"Мужской","M"));
+        //gendersRepository.save(new Gender(2L,"Женский","Ж"));
+
+        //positionsRepository.save(new Position("Директор","Д"));
+        //positionsRepository.save(new Position("Заместитель директора","ЗД"));
+
+        clientsRepository.save(new Client("Вася","505050"));
+        clientsRepository.save(new Client("Ваня","506070"));
+
     }
 }

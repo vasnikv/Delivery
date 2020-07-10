@@ -39,7 +39,15 @@ public class Client {
         this.phone = phone;
     }
 
-//    @OneToOne(fetch = FetchType.EAGER)
+    public Client(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
+
+    public Client() {
+    }
+
+    //    @OneToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "actual_address_id")
 //    private Address address;
 

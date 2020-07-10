@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание заказа</title>
+    <script>
+        function searchClientName(obj){
+            alert("searchClientName");
+
+        }
+
+        function searchClientPhone(obj){
+            alert("searchClientPhone");
+
+        }
+    </script>
+</head>
+<body>
+
+<div th:insert="~{fragments :: header}"></div>
+<form action="#" th:action="@{/orders/save}" th:object="${order}"
+      method="post">
+    <fieldset>
+        <input type="submit" id="submitButton" class="btn btn-success" th:value="Сохранить">
+        <input type="reset" id="resetButton" class="btn btn-danger" name="reset" th:value="Reset"/>
+        <input type="hidden" th:field="*{id}"/>
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tbody>
+                <tr >
+                    <td> Номер </td>
+                    <td><input th:field="*{number}"/></td>
+                </tr>
+                <tr>
+                    <td> Дата </td>
+                    <td><input type="date" th:field="*{orderDate}"/></td>
+                </tr>
+                <tr>
+                    <td> Дата доставки </td>
+                    <td><input type="date" th:field="*{deliveryDate}"/></td>
+                </tr>
+                <tr>
+                    <td> Дата начала приготовления </td>
+                    <td><input type="date" th:field="*{startDate}"/></td>
+                </tr>
+                <tr>
+                    <td> Клиент </td>
+                    <td><input th:field="*{order.client.name}" onChange="searchClientName(this)"/></td>
+                </tr>
+                <tr>
+                    <td> Телефон </td>
+                    <td><input th:field="*{order.client.phone}" onChange="searchClientPhone(this)"/></td>
+                </tr>
+                <tr>
+                    <td> Адрес </td>
+                    <td><input th:field="*{order.address.location}"/></td>
+                </tr>
+
+                    <!--<td><span th:if="${order.stage}" th:text="${order.stage.name}"> cookingstage </span><span th:unless="${order.stage}"> - </span></td>-->
+                <tr>
+                    <td> Описание </td>
+                    <td><input th:field="*{order.description}"/></td>
+                </tr>
+
+                    <!--<td>-->
+                        <!--<select th:field="*{gender}">-->
+                            <!--<option value=""> &#45;&#45; </option>-->
+                            <!--<option th:each="entry : ${mapGenders.entrySet()}"-->
+                                    <!--th:value="${entry.key}"-->
+                                    <!--th:utext="${entry.value}">-->
+                            <!--</option>-->
+                        <!--</select>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<select th:field="*{position}">-->
+                            <!--<option value=""> &#45;&#45; </option>-->
+                            <!--<option th:each="entry : ${mapPositions.entrySet()}"-->
+                                    <!--th:value="${entry.key}"-->
+                                    <!--th:utext="${entry.value}">-->
+                            <!--</option>-->
+                        <!--</select>-->
+                    <!--</td>-->
+                    <!--<td><input type="date" th:field="*{emplDate}"/></td>-->
+                    <!--<td><input type="date" th:field="*{dismDate}"/></td>-->
+                    <!--<td><input th:field="*{login}"/></td>-->
+                    <!--<td><input th:field="*{password}"/></td>-->
+                    <!--<td><input th:field="*{role}"/></td>-->
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</form>
+
+
+</body>
+</html>
