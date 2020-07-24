@@ -1,4 +1,4 @@
-package ru.iv.entity;
+package ru.iv.delivery.entity;
 
 import javax.persistence.*;
 
@@ -22,8 +22,8 @@ public class Dish {
     @Column(name = "ingridients", length = 8192)
     private String ingridients;
 
-    @Column(name = "minutes")
-    private Integer minutes;
+//    @Column(name = "minutes")
+//    private Integer minutes;
 
     public Long getId() {
         return id;
@@ -57,11 +57,11 @@ public class Dish {
         this.ingridients = ingridients;
     }
 
-    public Integer getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(Integer minutes) {
-        this.minutes = minutes;
-    }
+//    public Integer getMinutes() {
+//        return minutes;
+//    }
+//
+//    public void setMinutes(Integer minutes) {
+//        this.minutes = minutes;
+//    }
 }

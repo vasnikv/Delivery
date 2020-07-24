@@ -1,6 +1,6 @@
-package ru.iv.controller;
+package ru.iv.delivery.controller;
 
-import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,20 +8,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import petrov.delivery.webapi.ParamRespCompanyInfo;
-import petrov.delivery.webapi.ParamRespProduct;
-import petrov.delivery.webapi.api.IMobileClientApi;
-import ru.iv.entity.*;
-import ru.iv.repository.*;
-import ru.iv.utils.MockMobileClientApiResponse;
+import ru.iv.delivapi.view.PersonView;
+import ru.iv.delivery.entity.*;
+import ru.iv.delivery.repository.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@RestController
 @Controller
-public class MyController implements IMobileClientApi {
+public class WebController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/index")
@@ -47,6 +44,9 @@ public class MyController implements IMobileClientApi {
     @Autowired
     ClientsRepository clientsRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping("/login")
     public String login() {
         return "/login";
@@ -59,7 +59,14 @@ public class MyController implements IMobileClientApi {
 
     @GetMapping("/persons")
     public String showAllPersons(Model model) {
-        model.addAttribute("persons", personsRepository.findAll());
+        //BeanUtils.copyProperties(persons, personsRepository.findAll());
+        ModelMapper modelMapper = new ModelMapper();
+        List<Person> persons = personsRepository.findAll();
+        List<PersonView> personsview = new ArrayList<>();
+        persons.forEach(person -> {
+            personsview.add(modelMapper.map(person, PersonView.class));
+        });
+        model.addAttribute("persons", personsview);
         return "persons";
     }
 
@@ -104,7 +111,7 @@ public class MyController implements IMobileClientApi {
     @PostMapping("/persons/save")
     public String savePerson(@ModelAttribute Person person, Model model) {
         final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        if (person.getPassword().length() < 60){
+        if (person.getPassword().length() < 60) {
             person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
         }
         personsRepository.save(person);
@@ -202,22 +209,8 @@ public class MyController implements IMobileClientApi {
     //-------------------------------------------------------------------------
 
     @GetMapping("/rest")
-    public List<Client> searchClientName(String name){
+    public List<Client> searchClientName(String name) {
         List<Client> clients = clientsRepository.searchClientName(name);
         return clients;
-    }
-
-    @NotNull
-    @Override
-    @GetMapping("/getallproducts")
-    public ParamRespProduct getProducts() {
-        return MockMobileClientApiResponse.INSTANCE.getProducts();
-    }
-
-    @NotNull
-    @Override
-    @GetMapping("/getcompanyinfo")
-    public ParamRespCompanyInfo getCompanyInfo() {
-        return MockMobileClientApiResponse.INSTANCE.getCompanyInfo();
     }
 }

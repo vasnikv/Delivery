@@ -1,8 +1,8 @@
-package ru.iv.repository;
+package ru.iv.delivery.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ru.iv.entity.Person;
+import ru.iv.delivery.entity.Person;
 
 public interface PersonsRepository extends JpaRepository<Person, Long> {
 

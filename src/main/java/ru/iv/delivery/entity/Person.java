@@ -1,7 +1,7 @@
-package ru.iv.entity;
+package ru.iv.delivery.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.iv.converter.LocalDateAttributeConverter;
+import ru.iv.delivery.converter.LocalDateAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;

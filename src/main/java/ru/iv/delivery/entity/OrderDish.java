@@ -1,10 +1,10 @@
-package ru.iv.entity;
+package ru.iv.delivery.entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ORDERSTAGES")
-public class OrderStage {
+@Table(name = "ORDERDISHES")
+public class OrderDish {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -14,12 +14,11 @@ public class OrderStage {
     private Order order;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "stage_id")
-    private Stage stage;
+    @JoinColumn(name = "dish_id")
+    private Dish dish;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id")
-    private Person person;
+    @Column(name = "quantity")
+    private Integer quantity;
 
     public Long getId() {
         return id;
@@ -37,19 +36,19 @@ public class OrderStage {
         this.order = order;
     }
 
-    public Stage getStage() {
-        return stage;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 
-    public Person getPerson() {
-        return person;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

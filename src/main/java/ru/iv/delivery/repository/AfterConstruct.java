@@ -1,8 +1,8 @@
-package ru.iv.repository;
+package ru.iv.delivery.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.iv.entity.Client;
+import ru.iv.delivery.entity.Client;
 
 import javax.annotation.PostConstruct;
 
