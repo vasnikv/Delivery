@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import petrov.delivery.webapi.ParamRespCompanyInfo;
 import petrov.delivery.webapi.ParamRespProduct;
 import petrov.delivery.webapi.api.IMobileClientApi;
 import ru.iv.entity.*;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+//@RestController
 @Controller
 public class MyController implements IMobileClientApi {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -211,5 +212,12 @@ public class MyController implements IMobileClientApi {
     @GetMapping("/getallproducts")
     public ParamRespProduct getProducts() {
         return MockMobileClientApiResponse.INSTANCE.getProducts();
+    }
+
+    @NotNull
+    @Override
+    @GetMapping("/getcompanyinfo")
+    public ParamRespCompanyInfo getCompanyInfo() {
+        return MockMobileClientApiResponse.INSTANCE.getCompanyInfo();
     }
 }

@@ -1,8 +1,6 @@
 package ru.iv.utils
 
-import petrov.delivery.webapi.CategoryWithProductList
-import petrov.delivery.webapi.ParamRespProduct
-import petrov.delivery.webapi.Product
+import petrov.delivery.webapi.*
 import java.math.BigDecimal
 
 object MockMobileClientApiResponse {
@@ -31,5 +29,16 @@ object MockMobileClientApiResponse {
                         )
                 )
         )
+    }
+
+    fun getCompanyInfo(): ParamRespCompanyInfo {
+        return ParamRespCompanyInfo(
+                listOf(
+                        CompanyPlace(Coords(56.86831,53.27369), "Автозаводская 2а"),
+                        CompanyPlace(Coords(56.83746,53.21406), "Пушкинская 165")
+                ),
+                "Хочу Есть Халяль",
+                "8 (84371) 7-00-77",
+                "feedback@hochu_halal.ru")
     }
 }

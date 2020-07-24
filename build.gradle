@@ -43,7 +43,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 	// Delivery webApi
-	implementation 'com.github.peiwal:Delivery-webapi:1.0.2'
+	implementation 'com.github.peiwal:Delivery-webapi:1.0.4'
 }
 
 test {
