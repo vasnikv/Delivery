@@ -11,6 +11,9 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	maven {
+		url "https://jitpack.io"
+	}
 }
 
 dependencies {
@@ -38,6 +41,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+	// Delivery webApi
+	implementation 'com.github.peiwal:Delivery-webapi:1.0.2'
 }
 
 test {

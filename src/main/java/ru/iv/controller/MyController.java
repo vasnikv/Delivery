@@ -1,5 +1,6 @@
 package ru.iv.controller;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +8,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import petrov.delivery.webapi.ParamRespProduct;
+import petrov.delivery.webapi.api.IMobileClientApi;
 import ru.iv.entity.*;
 import ru.iv.repository.*;
+import ru.iv.utils.MockMobileClientApiResponse;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RestController
 @Controller
-public class MyController {
+public class MyController implements IMobileClientApi {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/index")
@@ -201,5 +206,10 @@ public class MyController {
         return clients;
     }
 
-
+    @NotNull
+    @Override
+    @GetMapping("/getallproducts")
+    public ParamRespProduct getProducts() {
+        return MockMobileClientApiResponse.INSTANCE.getProducts();
+    }
 }
